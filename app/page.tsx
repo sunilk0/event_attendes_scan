@@ -12,6 +12,10 @@ export default function CheckInPage() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    if (!phone.trim()) {
+      setError("Please enter your phone number.");
+      return;
+    }
     setLoading(true);
 
     try {
@@ -72,7 +76,7 @@ export default function CheckInPage() {
 
           <button
             type="submit"
-            disabled={loading || !phone.trim()}
+            disabled={loading}
             className="w-full bg-blue-600 text-white text-lg font-semibold py-4 rounded-xl hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Checking in…" : "Check In"}
