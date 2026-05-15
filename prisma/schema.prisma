@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Member {
+  id        Int       @id @default(autoincrement())
+  phone     String    @unique
+  name      String
+  ageGroup  String
+  gender    String
+  createdAt DateTime  @default(now())
+  checkIns  CheckIn[]
+}
+
+model CheckIn {
+  id          Int      @id @default(autoincrement())
+  memberId    Int
+  member      Member   @relation(fields: [memberId], references: [id])
+  checkedInAt DateTime @default(now())
+  serviceDate String
+}
